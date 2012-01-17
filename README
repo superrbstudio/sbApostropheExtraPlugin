@@ -32,6 +32,10 @@ class aPageSettingsForm extends sbApostropheExtraPluginaPageSettingsForm
 
 6. Now you can set the Meta title for all pages in Apostrophe.
 
+CREDIT
+
+Thanks to Robert Speer for the inspiration to package this into a plugin and share
+
 ##################################################
 
 Made by Superrb

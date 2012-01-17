@@ -19,7 +19,7 @@ class sbApostropheExtraPluginaActions extends BaseaActions
 			$metaTitle = $this->page->getMetaTitle();
 			if(strlen($metaTitle)) 
 			{
-				$this->getResponse()->addMeta('title', aTools::getOptionI18n('title_prefix').$metaTitle); 
+				$this->getResponse()->addMeta('title', aTools::getOptionI18n('title_prefix') . $metaTitle . aTools::getOptionI18n('title_suffix')); 
 			}
 		}
 

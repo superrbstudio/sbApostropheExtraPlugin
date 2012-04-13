@@ -16,4 +16,15 @@ class PluginsbApostropheExtraPluginaPageTable extends PluginaPageTable
             ->groupBy('c.id')
             ->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
   }
+  
+  public static function listProjectPageCategoriesForPage($page)
+  {
+    $fast = sfConfig::get('app_a_fasthydrate', false);
+    return Doctrine::getTable('aCategory')->createQuery('c')
+            ->innerJoin('c.ProjectPages AS p')
+            ->orderBy('c.name')
+            ->where('p.id = ?', $page['id'])
+            ->groupBy('c.id')
+            ->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
+  }
 }

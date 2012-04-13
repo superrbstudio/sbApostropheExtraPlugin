@@ -3,3 +3,43 @@ aPage:
  columns: 
    meta_title: 
      type: string(255) 
+     
+# We have a lot of use cases where we want to be able to assign categories to pages
+# These can be used to create filtered lists of sub pages
+ relations:
+    ProjectCategories:
+      foreignAlias: ProjectPageCategories
+      class: aCategory
+      refClass: aProjectPageToCategory
+      local: page_id
+      foreign: category_id
+  
+aProjectPageToCategory:
+  columns:
+    page_id:
+      type: integer
+      primary: true
+    category_id:
+      type: integer
+      primary: true
+  relations:
+    ProjectPage:
+      foreignAlias: ProjectPageCategories
+      class: aPage
+      local: page_id
+      onDelete: CASCADE
+    Category:
+      foreignAlias: ProjectPageCategories
+      class: aCategory
+      local: category_id
+      onDelete: CASCADE
+ 
+# Extend the category class to include the relationship
+aCategory:
+  relations:
+    ProjectPages:
+      foreignAlias: ProjectPageCategories
+      class: aPage
+      refClass: aProjectPageToCategory
+      local: category_id
+      foreign: page_id

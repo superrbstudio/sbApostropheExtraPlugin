@@ -124,6 +124,13 @@
 				</div>
 				<?php echo $form['real_meta_description']->renderError() ?>
 			</div>
+      <div class="a-form-row meta-categories" id="superrb-page-meta-categories">
+				<h4 class="a-block"><?php echo $form['ProjectCategories']->renderLabel(__('Page Categories', array(), 'apostrophe')) ?></h4>
+				<div class="a-form-field">
+					<?php echo $form['ProjectCategories'] ?>
+				</div>
+				<?php echo $form['ProjectCategories']->renderError() ?>
+			</div>
 		</div>
 	</div>
 
@@ -158,5 +165,6 @@
 <?php a_js_call('apostrophe.enablePageSettings(?)', array('id' => $stem, 'pageId' => $page->id, 'new' => $page->isNew(), 'slugStem' => $slugStem,  'url' => a_url('a', 'settings') . '?' . http_build_query($page->isNew() ? array('new' => 1, 'parent' => $parent->slug) : array('id' => $page->id)), 'slugifyUrl' => a_url('a', 'slugify'), 'engineUrl' => a_url('a', 'engineSettings'))) ?>
 <?php a_js_call('apostrophe.accordion(?)', array('accordion_toggle' => '.a-options-section:not(".open") h3')) ?>
 <?php a_js_call('apostrophe.radioToggleButton(?)', array('field' => '.'.$stem.'-status', 'opt1Label' => 'on', 'opt2Label' => 'off', 'debug' => false)) ?>
+<?php a_js_call('aMultipleSelect(?,?)', '#superrb-page-meta-categories', array('choose-one' => 'Pick Page Categories')); ?>
 <?php // All AJAX actions that use a_js_call must do this since they have no layout to do it for them ?>
 <?php include_partial('a/globalJavascripts') ?>

@@ -79,17 +79,20 @@
         </div>
       </div>
     <?php else: ?>
-			<div class="a-form-row status">
-			  <h4><label><?php echo __('Published', null, 'apostrophe') ?></label></h4>
-		  	<div class="<?php echo $stem ?>-status">
-					<?php echo $form['archived'] ?>
-					<?php if(isset($form['cascade_archived'])): ?>
-						<div class="cascade-checkbox a-cascade-option">
-							<?php echo $form['cascade_archived'] ?> <?php echo __('apply to subpages', null, 'apostrophe') ?>
-						</div>
-					<?php endif ?> 
+    	<?php // It's nice to be able to shut this off in custom permissions ?>
+    	<?php if (isset($form['archived'])): ?>
+				<div class="a-form-row status">
+				  <h4><label><?php echo __('Published', null, 'apostrophe') ?></label></h4>
+			  	<div class="<?php echo $stem ?>-status">
+						<?php echo $form['archived'] ?>
+						<?php if(isset($form['cascade_archived'])): ?>
+							<div class="cascade-checkbox a-cascade-option">
+								<?php echo $form['cascade_archived'] ?> <?php echo __('apply to subpages', null, 'apostrophe') ?>
+							</div>
+						<?php endif ?> 
+					</div>
 				</div>
-			</div>
+			<?php endif ?>
     <?php endif ?>
 	</div>
 	
@@ -103,19 +106,19 @@
 	
 	<div class="a-options-section tags-metadata a-accordion clearfix">
 		<h3>Tags &amp; Metadata</h3>
-		<div class="a-accordion-content">			
-			<div class="a-form-row keywords">
-				<div class="a-form-field">
-					<?php echo $form['tags']->render() ?>
-				</div>
-				<?php echo $form['tags']->renderError() ?>
-			</div>
-			<div class="a-form-row meta-title"> 
+		<div class="a-accordion-content">	
+      <div class="a-form-row meta-title"> 
 				<h4 class="a-block"><?php echo $form['meta_title']->renderLabel(__('Meta Title', array(), 'apostrophe')) ?></h4> 
 					<div class="a-form-field"> 
 						<?php echo $form['meta_title'] ?> 
 					</div> 
 				<?php echo $form['meta_title']->renderError() ?> 
+			</div>
+			<div class="a-form-row keywords">
+				<div class="a-form-field">
+					<?php echo $form['tags']->render() ?>
+				</div>
+				<?php echo $form['tags']->renderError() ?>
 			</div>
 			<div class="a-form-row meta-description">
 				<h4 class="a-block"><?php echo $form['real_meta_description']->renderLabel(__('Meta Description', array(), 'apostrophe')) ?></h4>
@@ -168,3 +171,4 @@
 <?php a_js_call('aMultipleSelect(?,?)', '#superrb-page-meta-categories', array('choose-one' => 'Pick Page Categories')); ?>
 <?php // All AJAX actions that use a_js_call must do this since they have no layout to do it for them ?>
 <?php include_partial('a/globalJavascripts') ?>
+

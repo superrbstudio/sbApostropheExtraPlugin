@@ -106,20 +106,23 @@
 	
 	<div class="a-options-section tags-metadata a-accordion clearfix">
 		<h3>Tags &amp; Metadata</h3>
-		<div class="a-accordion-content">	
-      <div class="a-form-row meta-title"> 
-				<h4 class="a-block"><?php echo $form['meta_title']->renderLabel(__('Meta Title', array(), 'apostrophe')) ?></h4> 
-					<div class="a-form-field"> 
-						<?php echo $form['meta_title'] ?> 
-					</div> 
-				<?php echo $form['meta_title']->renderError() ?> 
-			</div>
+		<div class="a-accordion-content">			
 			<div class="a-form-row keywords">
 				<div class="a-form-field">
 					<?php echo $form['tags']->render() ?>
 				</div>
 				<?php echo $form['tags']->renderError() ?>
 			</div>
+			<?php if (sfConfig::get('app_a_metaTitle')) : ?>
+				<div class="a-form-row meta-title">
+					<h4 class="a-block"><?php echo $form['real_meta_title']->renderLabel(__('Meta Title', array(), 'apostrophe')) ?></h4>
+					<div class="a-help">Leave blank to use the navigation title as the title tag.</div>
+					<div class="a-form-field">
+						<?php echo $form['real_meta_title']->render(array('class' => 'a-page-meta-title-field')) ?>
+					</div>
+					<?php echo $form['real_meta_title']->renderError() ?>
+				</div>
+			<?php endif ?>
 			<div class="a-form-row meta-description">
 				<h4 class="a-block"><?php echo $form['real_meta_description']->renderLabel(__('Meta Description', array(), 'apostrophe')) ?></h4>
 				<div class="a-form-field">
@@ -171,4 +174,5 @@
 <?php a_js_call('aMultipleSelect(?,?)', '#superrb-page-meta-categories', array('choose-one' => 'Pick Page Categories')); ?>
 <?php // All AJAX actions that use a_js_call must do this since they have no layout to do it for them ?>
 <?php include_partial('a/globalJavascripts') ?>
+
 

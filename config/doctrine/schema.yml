@@ -1,8 +1,5 @@
 # Extend the page to add a meta_title column
-aPage: 
- columns: 
-   meta_title: 
-     type: string(255) 
+aPage:
      
 # We have a lot of use cases where we want to be able to assign categories to pages
 # These can be used to create filtered lists of sub pages

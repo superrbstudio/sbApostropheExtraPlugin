@@ -1,0 +1,6 @@
+sb_enhanced_search:
+  url: /admin/a/enhanced-search
+  param: { module: sbEnhancedSearch, action: search }
+sb_enhanced_search_terms:
+  url: /admin/a/enhanced-search-terms
+  param: { module: sbEnhancedSearch, action: terms }

@@ -40,3 +40,13 @@ aCategory:
       refClass: aProjectPageToCategory
       local: category_id
       foreign: page_id
+      
+      
+# Model to track searches
+sbEnhancedSearchPhrase:
+  actAs:
+    Timestampable: ~
+  columns:
+    id: { type: integer, primary: true, autoincrement: true }
+    phrase: { type: string(255) }
+    usage_count: { type: integer }

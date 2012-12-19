@@ -1,40 +1,54 @@
 sbApostropheExtraPlugin
 
 Extended features for Apostrophe
-- Adds ability to add a meta title to a page
 - Adds ability to assign categories to a page
 
-INSTALLATION
+Modules
+- sbExternalLinkClick - Tracks clicks on external links
+- sbEnhancedSearch - Enhances site search with an auto complete feature that learns what your site users search for.
+
+INSTALLATION PAGE CATEGORIES
+
 1. Download/checkout/add submodule the plugin to your plugins directory and enable in /config/ProjectConfiguration.class.php
 
-2. Override the main apostrophe actions at the project level: /apps/frontend/modules/a/actions/actions.class.php
-
-<?php
-class aActions extends sbApostropheExtraPluginaActions
-{
-}
-?>
-
-3. Override the aPageSettingsForm Class at the project level: /lib/form/aPageSettingsForm.class.php
-
-<?php
+2. Override the aPageSettingsForm Class at the project level: /lib/form/aPageSettingsForm.class.php
 class aPageSettingsForm extends sbApostropheExtraPluginaPageSettingsForm
 {
 }
-?>
 
-4. Override the Page Settings Form Template at the project level: /apps/frontend/modules/a/templates/settingsSuccess.php
-   and add the following content:
+3. Override the Page Settings Form Template at the project level: /apps/frontend/modules/a/templates/settingsSuccess.php and add the following content:
+require_once(sfConfig::get('sf_root_dir') . '/plugins/sbApostropheExtraPlugin/modules/a/templates/settingsSuccess.php');
 
-<?php require_once(sfConfig::get('sf_root_dir') . '/plugins/sbApostropheExtraPlugin/modules/a/templates/settingsSuccess.php'); ?>
+4. Rebuild your classes and update your database schema.
 
-5. Rebuild your classes and update your database schema.
+INSTALLATION EXTERNAL LINK CLICK TRACKING
 
-6. Now you can set the Meta title for all pages in Apostrophe.
+1. Download/checkout/add submodule the plugin to your plugins directory and enable in /config/ProjectConfiguration.class.php
 
-CREDIT
+2. Enable the sbExternalLinkClick Module in settings.yml
 
-Thanks to Robert Speer for the inspiration to package this into a plugin and share
+3. Add the js file to your view.yml
+- /sbApostropheExtraPlugin/js/sbApostropheExtraPlugin.js: { data-asset-group: global }
+
+4. Add the partial to the bottom of your layout, before the global javascripts partial
+<?php include_partial('sbExternalLinkClick/trackLinks'); ?>
+
+5. Enable tracking in your app.yml (See app.yml.example in Plugin)
+
+INSTALLATION ENHANCED SEARCH
+
+1. Download/checkout/add submodule the plugin to your plugins directory and enable in /config/ProjectConfiguration.class.php
+
+2. Enable the sbEnhancedSearch Module in settings.yml
+
+3. Add the js file to your view.yml
+- /sbApostropheExtraPlugin/js/sbApostropheExtraPlugin.js: { data-asset-group: global }
+
+4. Replace the search partial in your layout.php with
+<?php include_partial('sbEnhancedSearch/search') ?>
+
+5. Search phrases will now be tracked and suggested to users.
+
 
 ##################################################
 

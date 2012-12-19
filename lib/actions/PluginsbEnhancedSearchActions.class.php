@@ -23,8 +23,7 @@ class PluginsbEnhancedSearchActions extends BaseaActions
     parent::executeSearch($request);
     
     // work out search phrase and save
-    // only do this if the page parameter isn't present
-    if($request->getParameter('page', 0) == 0)
+    if($this->pager->getPage() == 1)
     {
       $phrase = sbEnhancedSearchPhraseTable::cleanPhrase($q);
       $phraseObject = sbEnhancedSearchPhraseTable::getInstance()->findOneByPhrase($phrase);

@@ -50,3 +50,6 @@ sbEnhancedSearchPhrase:
     id: { type: integer, primary: true, autoincrement: true }
     phrase: { type: string(255) }
     usage_count: { type: integer }
+    last_number_results: { type: integer }
+  indexes:
+    phrase: { fields: [ phrase ] }

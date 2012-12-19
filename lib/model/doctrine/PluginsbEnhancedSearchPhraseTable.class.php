@@ -19,11 +19,34 @@ class PluginsbEnhancedSearchPhraseTable extends Doctrine_Table
   
   public static function cleanPhrase($phrase)
   {
+    $phrase = strtolower($phrase);
     return $phrase;
   }
   
-  public static function getPhrases()
+  public static function cleanPhraseForDisplay($phrase)
   {
-    return array('Test1', 'Test2', 'Test3');
+    $phrase = ucfirst($phrase);
+    return $phrase;
+  }
+  
+  public static function getPhrases($term = null)
+  {
+    $results = array();
+    
+    $root = $root = Doctrine_Query::create()
+						->select('phrase')
+						->from('sbEnhancedSearchPhrase');
+    
+    if($term != null and $term != '' and strlen($term) > 1)
+		{
+			$root->where('phrase LIKE ?', '%' . self::cleanPhrase($term) . '%');
+		}
+    
+    $root->groupBy('phrase');
+		$root->orderBy('usage_count, last_number_results');
+
+		$phrases = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
+		foreach($phrases as $phrase){ $results[$phrase['phrase']] = self::cleanPhraseForDisplay($phrase['phrase']); }
+		return $results;
   }
 }

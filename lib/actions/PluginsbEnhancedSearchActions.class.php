@@ -23,7 +23,19 @@ class PluginsbEnhancedSearchActions extends BaseaActions
     parent::executeSearch($request);
     
     // work out search phrase and save
-    $phrase = $q;
+    $phrase = sbEnhancedSearchPhraseTable::cleanPhrase($q);
+    $phraseObject = sbEnhancedSearchPhraseTable::getInstance()->findOneByPhrase($phrase);
+    
+    if(!($phraseObject instanceof sbEnhancedSearchPhrase))
+    { 
+      $phraseObject = new sbEnhancedSearchPhrase; 
+      $phraseObject->setPhrase($phrase);
+      $phraseObject->setUsageCount(0);
+    }
+    
+    $phraseObject->setUsageCount($phraseObject->getUsageCount() + 1);
+    $phraseObject->setLastNumberResults($this->pager->getNbResults());
+    $phraseObject->save();
   }
   
   public function executeTerms(sfWebRequest $request)

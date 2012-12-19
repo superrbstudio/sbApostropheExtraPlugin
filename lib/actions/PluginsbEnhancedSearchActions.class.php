@@ -40,6 +40,8 @@ class PluginsbEnhancedSearchActions extends BaseaActions
       $phraseObject->setLastNumberResults($this->pager->getNbResults());
       $phraseObject->save();
     }
+    
+    $this->pageUrl = url_for('@sb_enhanced_search');
   }
   
   public function executeTerms(sfWebRequest $request)

@@ -41,7 +41,7 @@ class PluginsbEnhancedSearchActions extends BaseaActions
       $phraseObject->save();
     }
     
-    $this->pageUrl = url_for('@sb_enhanced_search');
+    $this->pageUrl = $this->generateUrl('@sb_enhanced_search');
   }
   
   public function executeTerms(sfWebRequest $request)

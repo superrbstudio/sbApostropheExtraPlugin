@@ -6,3 +6,24 @@ function sbEnhancedSearch(fieldId, source) {
     $(fieldId).autocomplete({ 'source': source });
   }
 }
+
+/**
+ * Set up link tracking
+ */
+function sbExternalLinkClickTrack(saveUri) {
+  $('a').each(function() {
+    var a = new RegExp('/' + window.location.host + '/');
+    if(!a.test(this.href)) {
+      $(this).click(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        trackLink(saveUri, this.href, document.URL);
+        window.open(this.href, '_blank');
+      });
+    }
+  });
+  
+  function trackLink(saveUri, externalUri, referrerUri) {
+    $.post(saveUri, { external_uri: externalUri, referrer_uri: referrerUri } );
+  }
+}

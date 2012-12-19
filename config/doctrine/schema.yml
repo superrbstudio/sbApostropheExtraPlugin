@@ -53,3 +53,22 @@ sbEnhancedSearchPhrase:
     last_number_results: { type: integer }
   indexes:
     phrase: { fields: [ phrase ] }
+    
+    
+# Model to track external link clicks
+sbExternalLinkClick:
+  actAs:
+    Timestampable: ~
+  columns:
+    id: { type: integer, primary: true, autoincrement: true }
+    external_uri: blob
+    referrer_uri: blob
+  indexes:
+    external_uri:
+      fields:
+       external_uri:
+         length: 1000
+    referrer_uri:
+      fields:
+        referrer_uri:
+          length: 1000

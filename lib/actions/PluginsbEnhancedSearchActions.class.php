@@ -42,6 +42,7 @@ class PluginsbEnhancedSearchActions extends BaseaActions
     }
     
     $this->pageUrl = $this->generateUrl('sb_enhanced_search');
+    $this->pagerUrl = $this->generateUrl('sb_enhanced_search') . "?" . http_build_query(array("q" => $q));
   }
   
   public function executeTerms(sfWebRequest $request)

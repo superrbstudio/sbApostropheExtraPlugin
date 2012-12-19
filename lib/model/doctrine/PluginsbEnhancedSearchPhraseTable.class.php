@@ -42,6 +42,8 @@ class PluginsbEnhancedSearchPhraseTable extends Doctrine_Table
 			$root->where('phrase LIKE ?', '%' . self::cleanPhrase($term) . '%');
 		}
     
+    $root->andWhere('last_number_results > 0');
+    
     $root->groupBy('phrase');
 		$root->orderBy('usage_count, last_number_results');
 

@@ -10,7 +10,7 @@ function sbEnhancedSearch(fieldId, source) {
 /**
  * Set up link tracking
  */
-function sbExternalLinkClickTrack(saveUri) {
+function sbExternalLinkClickTrack(saveUri, saveToGoogle) {
   $('a').each(function() {
     var a = new RegExp('/' + window.location.host + '/');
     if(!a.test(this.href)) {
@@ -18,6 +18,11 @@ function sbExternalLinkClickTrack(saveUri) {
         event.preventDefault();
         event.stopPropagation();
         trackLink(saveUri, this.href, document.URL);
+        
+        if(saveToGoogle) {
+          _gaq.push(['_trackEvent', 'External Link Click', this.href, document.URL]);
+        }
+        
         window.open(this.href, '_blank');
       });
     }

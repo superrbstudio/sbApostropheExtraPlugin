@@ -13,7 +13,8 @@ function sbEnhancedSearch(fieldId, source) {
 function sbExternalLinkClickTrack(saveUri, saveToGoogle) {
   $('a').each(function() {
     var a = new RegExp('/' + window.location.host + '/');
-    if(!a.test(this.href)) {
+    if(!a.test(this.href) && this.href != '') {
+      $(this).addClass('sb-external-link-click');
       $(this).click(function(event) {
         event.preventDefault();
         event.stopPropagation();

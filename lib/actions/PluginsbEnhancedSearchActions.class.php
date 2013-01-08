@@ -9,7 +9,7 @@ class PluginsbEnhancedSearchActions extends BaseaActions
 {
   public function executeSearch(sfWebRequest $request)
   {
-    $this->getUser()->setFlashAttribute('aCacheInvalid', true);
+    $this->getUser()->setFlash('aCacheInvalid', true);
     
     // we need to overide this before the parent search method has a chance to redirect back to the original search.
     $q = $request->getParameter('q');

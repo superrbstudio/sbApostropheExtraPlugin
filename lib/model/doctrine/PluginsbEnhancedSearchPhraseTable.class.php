@@ -45,6 +45,7 @@ class PluginsbEnhancedSearchPhraseTable extends Doctrine_Table
     $root->andWhere('last_number_results > 0');
     
     $root->groupBy('phrase');
+    $root->limit(sfConfig::get('app_sbEnhancedSearch_max_suggestions', 10)); 
 		$root->orderBy('usage_count, last_number_results');
 
 		$phrases = $root->execute(array(), Doctrine::HYDRATE_ARRAY);
